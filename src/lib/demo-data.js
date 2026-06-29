@@ -16,9 +16,7 @@ export const tireSets = [
 			{ label: 'ARG', name: 'Arrière gauche', wear: 13, state: 'Neuf' },
 			{ label: 'ARD', name: 'Arrière droit', wear: 11, state: 'Neuf' }
 		],
-		history: [
-			{ label: 'Réception', wear: 12, scanType: 'Avant pose' }
-		]
+		history: [{ label: 'Réception', wear: 12, scanType: 'Avant pose' }]
 	},
 	{
 		id: 'SET-S02',

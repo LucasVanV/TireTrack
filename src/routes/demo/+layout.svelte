@@ -1,5 +1,6 @@
-<script lang="ts">
+<script>
 	import { page } from '$app/state';
+	import { base, resolve } from '$app/paths';
 
 	let { children } = $props();
 
@@ -9,16 +10,23 @@
 		{ label: 'Données', href: '/demo/donnees' }
 	];
 
-	function isActive(href: string) {
-		if (href === '/demo') return page.url.pathname === '/demo';
-		return page.url.pathname.startsWith(href);
+	function currentPath() {
+		return page.url.pathname.replace(base, '') || '/';
+	}
+
+	function isActive(href) {
+		if (href === '/demo') return currentPath() === '/demo';
+		return currentPath().startsWith(href);
 	}
 </script>
 
 <main class="min-h-screen bg-[#f4f4f4] text-[#111]">
 	<header class="sticky top-0 z-30 border-b border-black/10 bg-white">
 		<div class="mx-auto flex max-w-7xl items-center gap-5 px-6 py-4">
-			<a href="/" class="flex h-10 shrink-0 items-center bg-[#d6001c] px-5 font-black text-white">
+			<a
+				href={resolve('/')}
+				class="flex h-10 shrink-0 items-center bg-[#d6001c] px-5 font-black text-white"
+			>
 				TireTrack
 			</a>
 
@@ -28,13 +36,11 @@
 			</div>
 
 			<nav class="flex min-w-0 flex-1 items-center justify-center gap-1 overflow-x-auto">
-				{#each navItems as item}
+				{#each navItems as item (item.href)}
 					<a
-						href={item.href}
+						href={resolve(item.href)}
 						class="shrink-0 px-5 py-2 text-sm font-black uppercase tracking-wide transition
-							{isActive(item.href)
-								? 'bg-[#111] text-white'
-								: 'text-black/50 hover:bg-black/5 hover:text-black'}"
+							{isActive(item.href) ? 'bg-[#111] text-white' : 'text-black/50 hover:bg-black/5 hover:text-black'}"
 					>
 						{item.label}
 					</a>

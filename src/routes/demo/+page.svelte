@@ -1,4 +1,5 @@
-<script lang="ts">
+<script>
+	import { resolve } from '$app/paths';
 	import { recentScans, tireSets, wearColor, badgeClass } from '$lib/demo-data';
 
 	const watched = tireSets.filter((set) => set.status === 'À surveiller').length;
@@ -10,9 +11,13 @@
 </svelte:head>
 
 <section class="mx-auto max-w-7xl px-6 py-8">
-	<div class="flex flex-col justify-between gap-5 border-b border-black/10 pb-6 lg:flex-row lg:items-end">
+	<div
+		class="flex flex-col justify-between gap-5 border-b border-black/10 pb-6 lg:flex-row lg:items-end"
+	>
 		<div>
-			<p class="border-l-4 border-[#d6001c] pl-4 text-sm font-black uppercase tracking-[0.25em] text-black/45">
+			<p
+				class="border-l-4 border-[#d6001c] pl-4 text-sm font-black uppercase tracking-[0.25em] text-black/45"
+			>
 				Dashboard paddock
 			</p>
 
@@ -21,14 +26,13 @@
 			</h1>
 
 			<p class="mt-4 max-w-3xl text-lg leading-8 text-black/60">
-				Suivi des derniers scans réalisés à la réception, avant pose, après session ou après
-				dépose. Le dashboard permet de repérer rapidement les trains OK, à surveiller ou à
-				remplacer.
+				Suivi des derniers scans réalisés à la réception, avant pose, après session ou après dépose.
+				Le dashboard permet de repérer rapidement les trains OK, à surveiller ou à remplacer.
 			</p>
 		</div>
 
 		<a
-			href="/demo/trains"
+			href={resolve('/demo/trains')}
 			class="bg-[#d6001c] px-6 py-4 text-center font-black uppercase tracking-wide text-white hover:bg-[#b80018]"
 		>
 			Voir les trains
@@ -71,7 +75,7 @@
 			</div>
 
 			<div class="space-y-4">
-				{#each recentScans as scan}
+				{#each recentScans as scan (scan.id)}
 					<article class="border border-black/10 bg-[#f7f7f7] p-4">
 						<div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
 							<div>
@@ -88,7 +92,9 @@
 							</div>
 
 							<div class="w-full md:w-64">
-								<div class="mb-1 flex justify-between text-[10px] font-black uppercase text-black/40">
+								<div
+									class="mb-1 flex justify-between text-[10px] font-black uppercase text-black/40"
+								>
 									<span>Usure estimée</span>
 									<span>{scan.wear}%</span>
 								</div>
@@ -99,7 +105,9 @@
 							</div>
 						</div>
 
-						<p class="mt-3 border-l-4 border-[#d6001c] bg-white p-3 text-sm font-semibold text-black/60">
+						<p
+							class="mt-3 border-l-4 border-[#d6001c] bg-white p-3 text-sm font-semibold text-black/60"
+						>
 							{scan.message}
 						</p>
 					</article>
@@ -112,7 +120,7 @@
 			<h2 class="mt-1 text-2xl font-black uppercase">État du stock</h2>
 
 			<div class="mt-6 space-y-4">
-				{#each tireSets as set}
+				{#each tireSets as set (set.id)}
 					<div>
 						<div class="mb-1 flex items-center justify-between">
 							<p class="font-black">{set.id}</p>
