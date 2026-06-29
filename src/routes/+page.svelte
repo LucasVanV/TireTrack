@@ -47,13 +47,13 @@
 		{ label: 'ARD', wear: 59, state: 'Correct', color: 'orange' }
 	];
 
-	function wearColor(color: string) {
+	function wearColor(color) {
 		if (color === 'green') return 'bg-green-500';
 		if (color === 'red') return 'bg-[#d6001c]';
 		return 'bg-orange-400';
 	}
 
-	function badgeClass(color: string) {
+	function badgeClass(color) {
 		if (color === 'green') return 'bg-green-100 text-green-700';
 		if (color === 'red') return 'bg-red-100 text-red-700';
 		return 'bg-orange-100 text-orange-700';
